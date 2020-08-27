@@ -59,11 +59,11 @@ public class CTB_NEW_ExportShortyThread extends Thread {
                 t.start();
                 t.join();
                 //létrehozunk egy String tömböt
-                String[][] pnadatok = new String[CTB_NEW_Variables.topshortmodel.getRowCount()][8];
+                String[][] pnadatok = new String[CTB_NEW_Variables.topshortmodel.getRowCount()][9];
                 //bejárjuk a modellt és bepakolunk mindent is a tömbbe
                 for (int m = 0; m < CTB_NEW_Variables.topshortmodel.getRowCount(); m++) {
                     pnadatok[m][0] = CTB.jTable1.getValueAt(i, 0).toString();
-                    for (int p = 0; p < 7; p++) {
+                    for (int p = 0; p < 8; p++) {
                         try {
                             pnadatok[m][p + 1] = CTB_NEW_Variables.topshortmodel.getValueAt(m, p).toString();
                         } catch (Exception e) {
@@ -119,6 +119,8 @@ public class CTB_NEW_ExportShortyThread extends Thread {
             sheet1.addCell(column);
             column = new Label(7, 0, "Supply");
             sheet1.addCell(column);
+            column = new Label(8, 0, "Qty/A");
+            sheet1.addCell(column);
 
 //feltöltjük sorokkal 
 //hányadik sorban vagyunk
@@ -138,7 +140,7 @@ public class CTB_NEW_ExportShortyThread extends Thread {
                         Label row = new Label(0, sorszama, lista.get(i)[s][0]);
                         sheet1.addCell(row);
 
-                        for (int oszlopok = 0; oszlopok < 7; oszlopok++) {
+                        for (int oszlopok = 0; oszlopok < 8; oszlopok++) {
 
                             row = new Label(oszlopok + 1, sorszama, lista.get(i)[s][oszlopok + 1]);
                             sheet1.addCell(row);
