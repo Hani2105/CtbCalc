@@ -5,6 +5,8 @@
  */
 package PlannTool.CTB_CALC;
 
+import static PlannTool.CTB_CALC.CTB.jTable7;
+import java.util.ArrayList;
 import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +43,7 @@ public class CTB_NEW_WhereUsed extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -90,46 +93,54 @@ public class CTB_NEW_WhereUsed extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
 
+        jCheckBox1.setText("FG only");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel2)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jCheckBox1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(401, 318));
+        setSize(new java.awt.Dimension(383, 314));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,7 +174,7 @@ public class CTB_NEW_WhereUsed extends javax.swing.JDialog {
 
                         CTB.jTable11.changeSelection(i, 0, false, false);
                         return;
-                        
+
                     }
 
                 }
@@ -174,6 +185,16 @@ public class CTB_NEW_WhereUsed extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        if (jCheckBox1.isSelected()) {
+            universalfilter uf = new universalfilter("FG", jTable1);
+        } else {
+
+            jTable1.setRowSorter(null);
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 //ez szedi össze az adatokat
 
     public void getData() {
@@ -184,15 +205,38 @@ public class CTB_NEW_WhereUsed extends javax.swing.JDialog {
 
 //bejárjuk az indented táblát és a jlabelben szereplő textet megpróbáljuk megkeresni
         for (int i = 0; i < CTB_NEW_Variables.indentedbommodel.getRowCount(); i++) {
+            String oratype = "";
+            String component = jLabel3.getText().trim();
+            if (component.equals(CTB_NEW_Variables.indentedbommodel.getValueAt(i, 7).toString().trim())) {
 
-            if (jLabel3.getText().trim().equals(CTB_NEW_Variables.indentedbommodel.getValueAt(i, 7).toString().trim())) {
+                String lvl = "'";
+                int q = i;
+                while (!oratype.equals("FGS") && q != CTB_NEW_Variables.indentedbommodel.getRowCount()) {
+                    for (int n = i; n < CTB_NEW_Variables.indentedbommodel.getRowCount(); n++) {
+                        //ha a component egyezik az indented comp al akkor adunk hozza sort
+                        if (component.equals(CTB_NEW_Variables.indentedbommodel.getValueAt(n, 7).toString().trim()) && !CTB_NEW_Variables.indentedbommodel.getValueAt(n, 3).toString().trim().equals("")) {
 
-                model.addRow(new Object[]{CTB_NEW_Variables.indentedbommodel.getValueAt(i, 3).toString().trim(), CTB_NEW_Variables.indentedbommodel.getValueAt(i, 4).toString().trim(), CTB_NEW_Variables.indentedbommodel.getValueAt(i, 6).toString().trim(), CTB_NEW_Variables.indentedbommodel.getValueAt(i, 13).toString().trim()});
+                            model.addRow(new Object[]{lvl + CTB_NEW_Variables.indentedbommodel.getValueAt(n, 3).toString().trim(), CTB_NEW_Variables.indentedbommodel.getValueAt(n, 4).toString().trim(), CTB_NEW_Variables.indentedbommodel.getValueAt(n, 6).toString().trim(), CTB_NEW_Variables.indentedbommodel.getValueAt(n, 13).toString().trim()});
+                            oratype = CTB_NEW_Variables.indentedbommodel.getValueAt(n, 4).toString().trim();
+                            component = CTB_NEW_Variables.indentedbommodel.getValueAt(n, 3).toString().trim();
+                            //ujrakezdjuk a while ciklust
+                            lvl += "'";
+                            q = i;
+                            break;
+                        }
+                        q++;
+                    }
+
+                }
 
             }
-
         }
+        if (jCheckBox1.isSelected()) {
+            universalfilter uf = new universalfilter("FG", jTable1);
+        } else {
 
+            jTable1.setRowSorter(null);
+        }
         CTB.TablaOszlopSzelesseg(jTable1);
 
     }
@@ -246,6 +290,7 @@ public class CTB_NEW_WhereUsed extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBox1;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
